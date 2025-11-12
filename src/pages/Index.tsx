@@ -5,10 +5,10 @@ const KettleVideoAnimation = () => {
 
   useEffect(() => {
     const scenes = [
-      { duration: 2000, next: 1 },
-      { duration: 2000, next: 2 },
-      { duration: 2000, next: 3 },
-      { duration: 1000, next: 0 }
+      { duration: 3500, next: 1 },
+      { duration: 3500, next: 2 },
+      { duration: 3500, next: 3 },
+      { duration: 2500, next: 0 }
     ];
 
     const timer = setTimeout(() => {
