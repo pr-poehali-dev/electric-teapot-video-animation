@@ -35,8 +35,12 @@ const KettleVideoAnimation = () => {
           <div className="relative">
             <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full animate-glow-pulse" />
             <div className="relative z-10 bg-card rounded-3xl p-12 border border-primary/30 backdrop-blur-sm">
-              <div className="w-64 h-64 bg-gradient-to-br from-secondary/30 to-muted rounded-2xl flex items-center justify-center">
-                <div className="text-8xl animate-rotate-slow">🫖</div>
+              <div className="w-80 h-80 bg-gradient-to-br from-secondary/30 to-muted rounded-2xl flex items-center justify-center overflow-hidden">
+                <img 
+                  src="https://cdn.poehali.dev/files/cb6cd4a1-cadf-4086-ad1b-eebd5bc1a0bb.png" 
+                  alt="Bugatti Kettle" 
+                  className="w-full h-full object-contain animate-rotate-slow"
+                />
               </div>
               <h3 className="mt-8 text-3xl font-playfair font-bold text-primary text-center tracking-wide">
                 LUMINA KETTLE
@@ -113,7 +117,13 @@ const KettleVideoAnimation = () => {
 
       {scene === 3 && (
         <div className="absolute inset-0 flex flex-col items-center justify-center animate-fade-in">
-          <div className="text-8xl mb-8 animate-zoom-in">🫖</div>
+          <div className="mb-8 animate-zoom-in">
+            <img 
+              src="https://cdn.poehali.dev/files/cb6cd4a1-cadf-4086-ad1b-eebd5bc1a0bb.png" 
+              alt="Bugatti Kettle" 
+              className="w-64 h-64 object-contain"
+            />
+          </div>
           <h2 className="text-5xl font-playfair font-bold text-primary mb-4 tracking-wider animate-slide-up">
             LUMINA KETTLE
           </h2>
