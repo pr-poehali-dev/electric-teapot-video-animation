@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
+import Icon from '@/components/ui/icon';
 
 const KettleVideoAnimation = () => {
   const [scene, setScene] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [speed, setSpeed] = useState(1);
 
   useEffect(() => {
-    const scenes = [
-      { duration: 3500, next: 1 },
-      { duration: 3500, next: 2 },
-      { duration: 3500, next: 3 },
-      { duration: 2500, next: 0 }
-    ];
+    if (isPaused) return;
+
+    const baseDurations = [3500, 3500, 3500, 2500];
+    const scenes = baseDurations.map((duration, index) => ({
+      duration: duration / speed,
+      next: (index + 1) % 4
+    }));
 
     const timer = setTimeout(() => {
       setScene(scenes[scene].next);
     }, scenes[scene].duration);
 
     return () => clearTimeout(timer);
-  }, [scene]);
+  }, [scene, isPaused, speed]);
 
   const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i,
@@ -26,9 +30,40 @@ const KettleVideoAnimation = () => {
     ty: -50 - Math.random() * 50
   }));
 
+  const speeds = [0.5, 1, 1.5, 2];
+
   return (
     <div className="relative w-full h-screen bg-gradient-to-b from-background via-background to-muted overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.1),transparent_70%)]" />
+
+      <div className="absolute top-8 right-8 z-50 flex gap-3">
+        <button
+          onClick={() => setIsPaused(!isPaused)}
+          className="bg-card/90 backdrop-blur-md border border-primary/30 rounded-full p-3 hover:bg-primary/20 transition-all hover:border-primary/50"
+          aria-label={isPaused ? 'Play' : 'Pause'}
+        >
+          <Icon name={isPaused ? 'Play' : 'Pause'} size={20} className="text-primary" />
+        </button>
+
+        <div className="bg-card/90 backdrop-blur-md border border-primary/30 rounded-full px-4 py-2 flex items-center gap-2">
+          <Icon name="Gauge" size={18} className="text-primary" />
+          <div className="flex gap-1">
+            {speeds.map((s) => (
+              <button
+                key={s}
+                onClick={() => setSpeed(s)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                  speed === s
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:text-primary'
+                }`}
+              >
+                {s}x
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {scene === 0 && (
         <div className="absolute inset-0 flex items-center justify-center animate-zoom-in">
